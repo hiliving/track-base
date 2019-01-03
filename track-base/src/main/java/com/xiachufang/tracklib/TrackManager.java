@@ -120,6 +120,7 @@ public final class TrackManager {
         }else {
             iSendControl = configBuilder.iSendControl;
         }
+        iSendControl.initTaskSize(0);
         init(context,application,isDebug);
     }
 

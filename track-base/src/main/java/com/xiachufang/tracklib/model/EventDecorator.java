@@ -1,5 +1,7 @@
 package com.xiachufang.tracklib.model;
 
+import android.util.Log;
+
 import com.xiachufang.tracklib.TrackManager;
 import com.xiachufang.tracklib.db.TrackData;
 import com.xiachufang.tracklib.services.TrackPushService;
@@ -48,6 +50,7 @@ public class EventDecorator {
 
         if (TrackManager.getSendControler()!=null&&TrackManager.getSendControler().shouldSend()){
             //符合发送条件
+            Log.e("testpushenvent",TrackManager.getSendControler().getQueneSize()+"");
             TrackPushService.getInstance().excutePushEvent();
         }
     }

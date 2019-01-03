@@ -1,6 +1,7 @@
 package com.xiachufang.tracklib.task;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.xiachufang.tracklib.TrackManager;
 import com.xiachufang.tracklib.db.TrackDBManager;
@@ -49,6 +50,7 @@ public class TrackSaveTask implements Runnable {
 
             //内存计数递增
             EventDecorator.pushEventByNum();
+            Log.e("testsendmethod",TrackManager.getSendControler().getQueneSize()+"");
 
 
         } catch (Exception e) {

@@ -15,4 +15,10 @@ public interface ISendControl {
     void deCrease();
 
     void reset();
+
+    void initTaskSize(int size);
+
+    int getQueneSize();
+
+    void deCreaseEventQueneNum(int size);
 }

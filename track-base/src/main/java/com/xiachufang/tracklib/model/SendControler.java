@@ -1,6 +1,5 @@
 package com.xiachufang.tracklib.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * creator huangyong
@@ -11,30 +10,57 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SendControler implements ISendControl{
 
     //当满足连续操作大于100条,就进行上传服务
-    private static final AtomicInteger eventNum = new AtomicInteger(0);
+    private static int eventNum = 0;
+
+    private static int eventQueneSize = 0;
 
     @Override
     public boolean shouldSend() {
 
-        if (eventNum.get()>=100){
+        if (eventNum>=100){
             return true;
         }else {
             return false;
         }
     }
 
+    /**
+     * 内存操作计数递增
+     */
     @Override
     public void inCrease() {
-        eventNum.incrementAndGet();
+        eventNum+=1;
     }
-
+    /**
+     * 成功发送一条，队列正在发送计数递减
+     */
     @Override
     public void deCrease() {
-        eventNum.decrementAndGet();
+        eventQueneSize-=1;
+    }
+
+    /**
+     * 发送队列发送完毕，数量重置
+     */
+    @Override
+    public void reset() {
+        eventQueneSize=0;
     }
 
     @Override
-    public void reset() {
-        eventNum.set(0);
+    public void initTaskSize(int size) {
+        eventNum=size;
     }
+
+    @Override
+    public int getQueneSize() {
+        return eventQueneSize;
+    }
+
+    @Override
+    public void deCreaseEventQueneNum(int size) {
+        eventQueneSize = size;
+        eventNum-=size;
+    }
+
 }

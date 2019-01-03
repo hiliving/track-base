@@ -7,7 +7,6 @@ import com.xiachufang.tracklib.db.TrackDBManager;
 import com.xiachufang.tracklib.db.TrackData;
 import com.xiachufang.tracklib.model.EventDecorator;
 import com.xiachufang.tracklib.net.TrackHttpManager;
-import com.xiachufang.tracklib.util.Logs;
 import com.xiachufang.tracklib.util.NetworkUtil;
 
 import java.util.List;
@@ -38,8 +37,9 @@ public class TrackSendTask {
         if (!NetworkUtil.isNetworkAvailable(context)) {
             return;
         }
-        //2.判断当前是否有任务正在进行，如果有，不进行数据读。
-        if (TrackHttpManager.get().getRequestQueue().getCurrentQueueSize()!=0){
+        //判断是否可以发送，由任务状态决定
+
+        if (TrackManager.getSendControler().getQueneSize()>0){
             TrackHttpManager.get().increaseRequestWaitNum();
             return;
         }
@@ -49,6 +49,8 @@ public class TrackSendTask {
 
         //4.获取小于当前时间的数据 集合`push_list`.
         List<TrackData> list = TrackDBManager.getEventListByDate(context,cut_point_date);
+        //初始化队列数量标记
+        TrackManager.getSendControler().deCreaseEventQueneNum(list.size());
 
         //5.根据list大小创建一个int值计数器，对这个唯一队列计数，
 
