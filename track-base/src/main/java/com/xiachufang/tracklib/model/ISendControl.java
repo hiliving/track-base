@@ -20,5 +20,5 @@ public interface ISendControl {
 
     int getQueneSize();
 
-    void deCreaseEventQueneNum(int size);
+    void updateEventQueneSize(int size);
 }

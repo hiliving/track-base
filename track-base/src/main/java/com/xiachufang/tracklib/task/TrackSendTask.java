@@ -50,7 +50,7 @@ public class TrackSendTask {
         //4.获取小于当前时间的数据 集合`push_list`.
         List<TrackData> list = TrackDBManager.getEventListByDate(context,cut_point_date);
         //初始化队列数量标记
-        TrackManager.getSendControler().deCreaseEventQueneNum(list.size());
+        TrackManager.getSendControler().updateEventQueneSize(list.size());
 
         //5.根据list大小创建一个int值计数器，对这个唯一队列计数，
 

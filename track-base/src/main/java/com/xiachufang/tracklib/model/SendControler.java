@@ -50,6 +50,7 @@ public class SendControler implements ISendControl{
     @Override
     public void initTaskSize(int size) {
         eventNum=size;
+        eventQueneSize=0;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class SendControler implements ISendControl{
     }
 
     @Override
-    public void deCreaseEventQueneNum(int size) {
+    public void updateEventQueneSize(int size) {
         eventQueneSize = size;
         eventNum-=size;
     }
